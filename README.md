@@ -4,7 +4,9 @@
 2. cloneしたプロジェクトをエディタで開く。
 3. cdコマンドでプロジェクトのルートディレクトリ(visitor-analytics-app)に移動。
 4. `docker-compose up -d`を実行して立ち上げる。
-5. 終了する時は`docker-compose down`を実行。
+5. http://localhost:18888/ にアクセス。
+6. 以下のようなエラーが出ている場合、`docker exec -it visitor-analytics-php bash`した後、`composer install`を実行。
+7. 終了する時は`docker-compose down`を実行。
 
 ## 開発手順
 1. `git checkout -b xxxx`で新しくブランチを作る(xxxxは自分の名前)。
