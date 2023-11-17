@@ -22,7 +22,6 @@ To have this happen automatically for branches without a tracking
 upstream, see 'push.autoSetupRemote' in 'git help config'.
 ```
 
-
 ## 各自で作業した内容をmasterブランチへ反映する手順
 1. GitHubでPull Requestを作成する。
 2. baseを`master`、compareを自分のブランチに設定。
