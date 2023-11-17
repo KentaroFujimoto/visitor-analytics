@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  php:
+    # ./docker/phpの内容(Dockerfile,php.ini,000-default)でphpコンテナ作成する
+    build: ./docker/php
+    # ./srcと/var/wwwをマウント。./srcと/var/wwwの変更内容が同期される。
+    volumes:
+      - ./src:/var/www
+    # 使用するポート番号を指定
+    ports:
+      - 18888:80
+    # コンテナ名を指定
+    container_name: visitor-analytics-php
+
+  # laravelの設定の際に、DB_HOSTとして指定される
+  mysql:
+    image: mysql:8.0
+    # mysql8の認証プラグイン。この記述がないと弾かれる。
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      # ${DB_PORT}と.envのWEB_PORTが対応
+      - 18889:3306
+    environment:
+      MYSQL_DATABASE: analytics-db
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_PASSWORD: pass
+    container_name: visitor-analytics-mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql #mysqlサービス名を指定
+      - PMA_USER=root
+      - PMA_PASSWORD=pass
+    links:
+      - mysql
+    ports:
+      - 18890:80
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
+    container_name: visitor-analytics-phpmyadmin
+
