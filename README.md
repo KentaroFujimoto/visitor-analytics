@@ -4,11 +4,12 @@
 2. cloneしたプロジェクトをエディタで開く。
 3. cdコマンドでプロジェクトのルートディレクトリ(visitor-analytics-app)に移動。
 4. `docker-compose up -d`を実行して立ち上げる。
-5.  `cp .env.example .env`を実行。
-6. `docker exec -it visitor-analytics-php bash`を実行。
+5. `cd src`でsrcディレクトリに移動して`cp .env.example .env`を実行。
+6. `cd ../`でプロジェクトのルートディレクトリに移動して`docker exec -it visitor-analytics-php bash`を実行し、コンテナに入る。
 7. root@2f15aa948b82:/var/www#に移動していることを確認し、`composer install`と`php artisan key:generate`を実行。
-8. http://localhost:18888/ にアクセスし、表示されていることを確認。
-9. 終了する時は`docker-compose down`を実行。
+8. `exit`でコンテナを抜けておく。
+9. http://localhost:18888/ にアクセスし、表示されていることを確認。
+10. 終了する時は`docker-compose down`を実行。
 
 ## 開発手順
 1. `git checkout -b xxxx`で新しくブランチを作る(xxxxは自分の名前)。
